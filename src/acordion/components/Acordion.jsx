@@ -14,9 +14,9 @@ export const Acordion = ({ title, content, bgColor }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        cursor: 'pointer',
         // userSelect: 'none',
         // msUserSelect: 'none'
-
     }
     
     const contentStyles = {
