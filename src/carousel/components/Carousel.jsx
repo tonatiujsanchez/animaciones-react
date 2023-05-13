@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import propTypes from "prop-types"
 
 import { TransitionGroup, CSSTransition } from "react-transition-group"
@@ -13,21 +13,34 @@ export const Carousel = ({ images }) => {
 
     const left = () => {
         setDirectionSlide('right')
-        if( activeIndex > 0){
-            setActiveIndex( activeIndex - 1 )
-        }else {
-            setActiveIndex( images.length - 1 )
-        }
+        setTimeout(() => {
+            if( activeIndex > 0){
+                setActiveIndex( activeIndex - 1 )
+            }else {
+                setActiveIndex( images.length - 1 )
+            }
+        }, 0);
     }
 
     const right = () => {
         setDirectionSlide('left')
-        if( activeIndex < images.length - 1 ){
-            setActiveIndex( activeIndex + 1 )
-        }else{
-            setActiveIndex( 0 )
-        }
+        setTimeout(() => {
+            if( activeIndex < images.length - 1 ){
+                setActiveIndex( activeIndex + 1 )
+            }else{
+                setActiveIndex( 0 )
+            }
+        }, 0);
     }
+
+    useEffect(() => {
+        const tick = setInterval( ()=>{
+            right()
+        },2000)
+    
+      return () => clearInterval(tick)
+    }, [activeIndex, left])
+    
 
     return (
         <div className="carousel">
